@@ -1,0 +1,148 @@
+body {
+  font-family: 'Kulim Park', sans-serif;
+  font-family: 'Comfortaa', cursive;
+  font-size: 20px;
+  color: #ebf2ff;
+  background: linear-gradient(to bottom right, #27419f, #00806b);
+  position: relative;
+}
+body h1 {
+  text-align: center;
+  margin: 50px 0px 20px;
+  text-shadow: 1px 1px #000;
+}
+body .set-wrap {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body .set-wrap .set {
+  flex-grow: 1;
+  margin: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0px 0px 7px 0px #002d63;
+  padding: 0px 0px 15px 0px;
+}
+body .set-wrap .set h1 {
+  background: rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
+  font-size: 18px;
+  padding: 10px;
+  margin: 0px 0px 20px;
+  text-align: center;
+}
+body .set-wrap .set .word {
+  padding: 7px;
+  font-size: 15px;
+}
+body .set-wrap .set .word span {
+  width: 150px;
+  display: inline-block;
+  text-transform: capitalize;
+}
+body .set-wrap li {
+  list-style: none;
+}
+body .button-wrap {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+body .button-wrap button {
+  color: #fff;
+  font-size: 16px;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-family: 'Comfortaa', cursive;
+  background: #27419f;
+  border: 1px solid #22398b;
+  text-shadow: 1px 1px #0e1739;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 7px 0px #002d63;
+  transition: 200ms;
+  cursor: pointer;
+}
+body .button-wrap button:focus {
+  outline: none;
+}
+body .button-wrap button:hover {
+  background: #1d3076;
+}
+body #action {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 7px 0px #002d63;
+  overflow: hidden;
+  padding: 30px;
+  margin: 50px;
+  border-radius: 2px;
+  color: #1d3076;
+  /*
+        display : flex;
+        justify-content : center;
+        flex-direction : column;
+        align-items : center;
+        */
+  height: 50vh;
+  position: relative;
+}
+body #action .status-bar {
+  position: absolute;
+  top: 20px;
+  width: 93%;
+  height: 40px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #ccc;
+  overflow: hidden;
+}
+body #action .status-bar span {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  transition: 800ms;
+}
+body #action .words {
+  margin-top: 120px;
+  text-align: center;
+}
+body #action .words .clue {
+  font-size: 40px;
+}
+body #action .words .answer {
+  font-size: 30px;
+  margin-top: 20px;
+  opacity: 0.9;
+}
+body #action .button-wrap {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 15px 0px;
+  background: #1d3076;
+}
+body #action .button-wrap button {
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+}
+body #action .button-wrap i:not(.fa-close) {
+  opacity: 0.5;
+  font-size: 26px;
+  margin-right: 6px;
+}
+body #action .button-wrap i.fa-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #fff;
+}
+.fade-enter-active {
+  transition: opacity 0.5s;
+}

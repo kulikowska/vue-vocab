@@ -1,0 +1,158 @@
+@leftColor : #27419f;
+@rightColor : #00806b;
+@bs : 0px 0px 7px 0px #002d63;
+@font : 'Comfortaa', cursive;
+
+body {
+    font-family: 'Kulim Park', sans-serif;
+    font-family: @font;
+    //font-family: 'Tajawal', sans-serif;
+
+    font-size : 20px;
+    color : #ebf2ff;
+    background : linear-gradient(to bottom right, @leftColor, @rightColor);
+    position : relative;
+
+    h1 {
+        text-align : center;
+        margin : 50px 0px 20px;
+        text-shadow : 1px 1px #000;
+    }
+    .set-wrap {
+        display : flex;
+        width : 100%;
+        margin : 0;
+        padding : 0;
+        .set {
+            flex-grow : 1;
+            margin : 20px;
+            background : fade(#000, 10%);
+            border-radius : 2px;
+            overflow : hidden;
+            box-shadow : @bs;
+            padding : 0px 0px 15px 0px;
+            h1 {
+                background : fade(#000, 70%);
+                text-transform : uppercase;
+                font-size : 18px;
+                padding : 10px;
+                margin : 0px 0px 20px;
+                text-align : center;
+            }
+            .word {
+                padding : 7px;
+                font-size : 15px;
+                span {
+                    width : 150px;
+                    display : inline-block;
+                    text-transform : capitalize;
+                }
+            }
+        }
+        li {
+            list-style : none;
+        }
+    }
+    .button-wrap {
+        width : 100%;
+        text-align : center;
+        margin-top : 50px;
+        button {
+            color : #fff;
+            font-size : 16px;
+            border-radius : 50px;
+            padding : 12px 20px;
+            font-family: @font;
+            background : @leftColor;
+            border : 1px solid darken(@leftColor, 5%);
+            text-shadow : 1px 1px darken(@leftColor, 25%);
+            letter-spacing : 0.5px;
+            text-transform : uppercase;
+            box-shadow : @bs;
+            transition : 200ms;
+            cursor : pointer;
+            &:focus {
+                outline : none;
+            }
+            &:hover {
+                background : darken(@leftColor, 10%);
+            }
+        }
+    }
+    #action {
+        background : fade(#fff, 90%);
+        box-shadow : @bs;
+        overflow    : hidden;
+        padding     : 30px;
+        margin      : 50px;
+        border-radius : 2px;
+        color : darken(@leftColor, 10%); 
+        position : relative;
+        /*
+        display : flex;
+        justify-content : center;
+        flex-direction : column;
+        align-items : center;
+        */
+        height : 50vh;
+        position : relative;
+        .status-bar {
+            position : absolute;
+            top : 20px;
+            width : 93%;
+            height : 40px;
+            border-radius : 8px;
+            margin-bottom : 10px;
+            background : #ccc;
+            overflow : hidden;
+            span {
+                position : absolute;
+                top : 0px;
+                bottom : 0px;
+                left : 0px;
+                transition : 800ms;
+            }
+        }
+        .words {
+            margin-top : 120px;
+            text-align : center;
+            .clue {
+                font-size : 40px;
+            }
+            .answer {
+                font-size : 30px;
+                margin-top : 20px;
+                opacity : 0.9;
+            }
+        }
+        .button-wrap {
+            position : absolute;
+            bottom : 0px;
+            left : 0px;
+            padding : 15px 0px;
+            background : darken(@leftColor, 10%);
+            button {
+               text-transform : none; 
+                display : inline-flex;
+                align-items : center;
+            }
+            i:not(.fa-close) {
+                opacity : 0.5;
+                font-size : 26px;
+                margin-right : 6px;
+            }
+            i.fa-close {
+                position : absolute;
+                top : 20px;
+                right : 20px;
+                font-size : 30px;
+                cursor : pointer;
+                color : #fff;
+            }
+        }
+    }
+}
+
+.fade-enter-active {
+  transition: opacity .5s;
+}
