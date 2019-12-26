@@ -5,50 +5,56 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
-<div id="list" v-if="activePanel.activePanel === 'list'">
-    <h1> Polish Vocabulary Flashcards </h1>
-    <ol class="set-wrap">
-        <li class="set" v-for="set in sets">
-            <h1> {{ set.title }} </h1>
-            <ol>
-                <li class="word" v-for="word in set.words">
-                    <span>{{ word.clue }}</span>
-                    <span>{{ word.answer }}</span>
-                    <span>{{ word.category }}</span>
+<div id="root">
+    <list id="list" inline-template>
+        <div v-if="activePanel.activePanel === 'list'">
+            <h1> Polish Vocabulary Flashcards </h1>
+            <ol class="set-wrap">
+                <li class="set" v-for="set in sets">
+                    <h1> {{ set.title }} </h1>
+                    <ol>
+                        <li class="word" v-for="word in set.words">
+                            <span>{{ word.clue }}</span>
+                            <span>{{ word.answer }}</span>
+                            <span>{{ word.category }}</span>
+                        </li>
+                    </ol>
                 </li>
             </ol>
-        </li>
-    </ol>
-    <div class="button-wrap">
-        <button v-on:click="toggleActive"> Start </button>
-    </div>
-</div>
-
-<div id="action" v-if="activePanel.activePanel === 'action'">
-    <div class="status-bar">
-        <span v-bind:style="{ backgroundColor : lessonStatus, width : completed }"></span>
-    </div>
-
-    <div class="words" v-if="!lessonCompleted">
-        <div class="clue">{{ sets[activeWordIdx].clue }}</div>
-        <input type="text"></input>
-        <div v-if="stage === 'answer'" class="answer">{{ sets[activeWordIdx].answer }}</div>
-
-        <div class="button-wrap">
-            <i class="fa fa-close" v-on:click="toggleActive"></i>
-            <button v-if="stage === 'newWord'" v-on:click="stage = 'answer'"><i class="fa fa-question-circle"></i> Check </button>
-            <span v-if="stage === 'answer'" class="yes-or-no">
-                <button v-on:click="comeBack"> <i class="fa fa-asterisk"></i>Oops </button>
-                <button v-on:click="nextWord(sets[activeWordIdx].clue)"><i class="fa fa-thumbs-up"></i> Correct!</button>
-            </span>
+            <div class="button-wrap">
+                <button v-on:click="toggleActive"> Start </button>
+            </div>
         </div>
-    </div>
-    <div v-else>
-        All Done!
-        <div class="button-wrap">
-            <button v-on:click="reset"> Play Again! </button>
+    </list>
+
+    <action id="action" inline-template>
+        <div v-if="activePanel.activePanel === 'action'">
+            <div class="status-bar">
+                <span v-bind:style="{ backgroundColor : lessonStatus, width : completed }"></span>
+            </div>
+
+            <div class="words" v-if="!lessonCompleted">
+                <div class="clue">{{ sets[activeWordIdx].clue }}</div>
+                <input type="text"></input>
+                <div v-if="stage === 'answer'" class="answer">{{ sets[activeWordIdx].answer }}</div>
+
+                <div class="button-wrap">
+                    <i class="fa fa-close" v-on:click="toggleActive"></i>
+                    <button v-if="stage === 'newWord'" v-on:click="stage = 'answer'"><i class="fa fa-question-circle"></i> Check </button>
+                    <span v-if="stage === 'answer'" class="yes-or-no">
+                        <button v-on:click="comeBack"> <i class="fa fa-asterisk"></i>Oops </button>
+                        <button v-on:click="nextWord(sets[activeWordIdx].clue)"><i class="fa fa-thumbs-up"></i> Correct!</button>
+                    </span>
+                </div>
+            </div>
+            <div v-else>
+                All Done!
+                <div class="button-wrap">
+                    <button v-on:click="reset"> Play Again! </button>
+                </div>
+            </div>
         </div>
-    </div>
+    </action>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

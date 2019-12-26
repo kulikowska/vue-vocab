@@ -33,14 +33,16 @@ let setData = {
 }
 
 const state = {
-    activePanel : 'action'
+    activePanel : 'list'
 }
 
-var list = new Vue({
-  el: '#list',
-  data: {
-    sets : setData.sets,
-    activePanel : state
+Vue.component('list', {
+  template : '#list',
+  data: function () {
+    return {
+        sets : setData.sets,
+        activePanel : state
+    }
   },
   methods : {
     toggleActive : function () {
@@ -49,18 +51,22 @@ var list = new Vue({
   }
 })
 
-var action = new Vue({
-  el : '#action',
-  data : {
-    message : 'Words',
-    originalSets : setData.sets[0].words,
-    sets : JSON.parse(JSON.stringify(setData.sets[0].words)),
-    activeWordIdx : 0,
-    activePanel : state,
-    stage : 'newWord',
-    lessonStatus : 'yellow',
-    completed : 0,
-    lessonCompleted : false
+
+// At some point separate this out into a single file component, or something other than an inline template
+Vue.component('action', {
+  template : '#action',
+  data: function () {
+    return {
+        message : 'Words',
+        originalSets : setData.sets[0].words,
+        sets : JSON.parse(JSON.stringify(setData.sets[0].words)),
+        activeWordIdx : 0,
+        activePanel : state,
+        stage : 'newWord',
+        lessonStatus : 'yellow',
+        completed : 0,
+        lessonCompleted : false
+    }
   },
   methods : {
     nextWord : function (clue) {
@@ -111,5 +117,6 @@ var action = new Vue({
         this.completed = 0;
     }
   }
-})
+});
 
+new Vue({ el: '#root' })
