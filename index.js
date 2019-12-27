@@ -7,7 +7,6 @@ let setData = {
                 { clue : 'Zaczyna', answer : 'begins', category : 'verb' },
                 { clue : 'wiele', answer : 'many', category : 'adjective' },
 
-                /*
                 { clue : 'Najlepsze', answer : 'best', category : 'adjective' },
                 { clue : 'przy tym', answer : 'at the same time', category : 'phrase' },
                 { clue : 'slodkim', answer : 'sweet', category : 'adjective' },
@@ -19,7 +18,6 @@ let setData = {
                 { clue : 'brudne', answer : 'dirty', category : 'adjective' },
                 { clue : 'czysty', answer : 'clean', category : 'adjective' },
                 { clue : 'zapomniec', answer : 'forget', category : 'verb' }
-                */
             ]
         },
         { 
@@ -55,6 +53,14 @@ Vue.component('list', {
   }
 })
 
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 
 // At some point separate this out into a single file component, or something other than an inline template
 Vue.component('action', {
@@ -62,7 +68,7 @@ Vue.component('action', {
   data: function () {
     return {
         originalSets : setData.sets[0].words,
-        sets : JSON.parse(JSON.stringify(setData.sets[0].words)),
+        sets : shuffle(JSON.parse(JSON.stringify(setData.sets[0].words))),
         wordsRemaining : setData.sets[0].words.length,
         activeWordIdx : 0,
 
@@ -71,18 +77,25 @@ Vue.component('action', {
         lessonStatus : 'yellow',
         completed : 0,
         lessonCompleted : false,
-        answer : 'difficult',
+        answer : '',
         correct : undefined 
     }
   },
   created : function() {
-    console.log(this.originalSets, ' words');
+   console.log(this.originalSets, ' words');
+   // Shuffle words
+   //this.sets = shuffle(this.sets);
+  },
+  mounted : function() {
+     this.$refs.answerInput.focus();
   },
   methods : {
     enterKeyPress : function(event) {
-        if (this.lessonCompleted)     { this.reset(); return }
-        if (this.stage === 'newWord') { this.checkAnswer(this.sets[this.activeWordIdx].answer); return }
-        if (this.stage === 'next')    { this.nextWord(); return }
+        if (this.answer !== '') {
+            if (this.lessonCompleted)     { this.reset(); return }
+            if (this.stage === 'newWord') { this.checkAnswer(this.sets[this.activeWordIdx].answer); return }
+            if (this.stage === 'next')    { this.nextWord(); return }
+        }
     },
     checkAnswer : function(correctAnswer) {
         //console.log('check answer', this.answer, correctAnswer);

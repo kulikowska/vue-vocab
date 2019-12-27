@@ -36,10 +36,11 @@
             <div class="words">
                 <div class="clue">{{ sets[activeWordIdx].clue }}</div>
                 <div class="input-wrap">
-                    <input type="text" v-model="answer" v-on:keyup.enter="enterKeyPress"></input>
+                    <input ref="answerInput" v-model="answer" v-on:keyup.enter="enterKeyPress"></input>
                     <i class="fa fa-check" v-if="correct"></i>
                     <i class="fa fa-close" v-if="correct === false"></i>
                 </div>
+                <div class="answer" v-if="!correct && stage === 'next'">{{ sets[activeWordIdx].answer}}</div>
 
 
                 <div class="button-wrap">
