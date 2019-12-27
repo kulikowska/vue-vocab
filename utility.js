@@ -23,12 +23,12 @@ let setData = {
         { 
             title : 'Set 2', 
             words : [
-                { clue : 'trudno', answer : 'difficult', category : 'adjective' },
-                { clue : 'Zaczyna', answer : 'begins', category : 'verb' },
-                { clue : 'wiele', answer : 'many', category : 'adjective' },
-                { clue : 'Najlepsze', answer : 'best', category : 'adjective' },
-                { clue : 'przy tym', answer : 'at the same time', category : 'phrase' },
-                { clue : 'slodkim', answer : 'sweet', category : 'adjective' },
+                { clue : 'Wiec', answer : 'so', category : 'preposition' },
+                { clue : 'Gdy', answer : 'if', category : 'preposition' },
+                { clue : 'Niektorzy', answer : 'some', category : 'noun' },
+                { clue : 'Prawnie', answer : 'almost', category : 'noun' },
+                { clue : 'Niestety', answer : 'unfortunately', category : '' },
+                { clue : 'Najbardziej', answer : 'most', category : '' }
             ]
         }
    ]

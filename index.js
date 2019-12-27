@@ -37,7 +37,7 @@ Vue.component('action', {
     }
   },
   created : function() {
-   console.log(this.originalSets, ' words');
+   //console.log(this.originalSets, ' words');
   },
   mounted : function() {
      this.$refs.answerInput.focus();
@@ -70,7 +70,6 @@ Vue.component('action', {
         this.stage = 'next';
     },
     nextWord : function () {
-        //console.log(this.sets.length, this.activeWordIdx);
 
         if (this.activeWordIdx === this.sets.length -1) {
             this.activeWordIdx = 0;
@@ -79,8 +78,6 @@ Vue.component('action', {
         } else if (!this.correct) {
             this.activeWordIdx++;
         }
-
-        //console.log(this.activeWordIdx, ' new active word idx');
 
         this.stage = 'newWord';
         this.answer = '';
