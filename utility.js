@@ -6,7 +6,6 @@ let setData = {
                 { clue : 'trudno', answer : 'difficult', category : 'adjective' },
                 { clue : 'Zaczyna', answer : 'begins', category : 'verb' },
                 { clue : 'wiele', answer : 'many', category : 'adjective' },
-
                 { clue : 'Najlepsze', answer : 'best', category : 'adjective' },
                 { clue : 'przy tym', answer : 'at the same time', category : 'phrase' },
                 { clue : 'slodkim', answer : 'sweet', category : 'adjective' },
@@ -45,21 +44,25 @@ function shuffle(array) {
 function getProgressBarStyle(completed) {
     var color;
     var percent = completed; 
+
     switch(true) {
-        case (completed < 20) :
+        case (completed <= 20) :
             color = '#FFD851';
             break;
-        case (completed > 20 && completed < 40) :
+        case (completed > 20 && completed <= 40) :
             color = '#FFC151';
             break;
-        case (completed > 40 && completed < 60 ) :
+        case (completed > 40 && completed <= 60 ) :
             color = '#FFA051';
             break;
-        case (completed > 60 && completed < 80) :
+        case (completed > 60 && completed <= 80) :
             color = '#b9e851';
             break;
         case (completed > 80) :
             color = '#75c531';
+            break;
+        default :
+            color = '#FFD851';
             break;
     }
     percent.toString();
