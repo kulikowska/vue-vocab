@@ -79,8 +79,13 @@ Vue.component('action', {
     console.log(this.originalSets, ' words');
   },
   methods : {
+    enterKeyPress : function(event) {
+        if (this.lessonCompleted)     { this.reset(); return }
+        if (this.stage === 'newWord') { this.checkAnswer(this.sets[this.activeWordIdx].answer); return }
+        if (this.stage === 'next')    { this.nextWord(); return }
+    },
     checkAnswer : function(correctAnswer) {
-        console.log('check answer', this.answer, correctAnswer);
+        //console.log('check answer', this.answer, correctAnswer);
         if (correctAnswer === this.answer) {
 
             this.wordsRemaining--;
@@ -107,6 +112,8 @@ Vue.component('action', {
             this.completed += '%';
 
             this.correct = true;
+
+            if (this.wordsRemaining === 0) { this.lessonCompleted = true }
         } else {
             this.correct = false;
         }
@@ -114,7 +121,7 @@ Vue.component('action', {
         this.stage = 'next';
     },
     nextWord : function () {
-        console.log(this.sets.length, this.activeWordIdx);
+        //console.log(this.sets.length, this.activeWordIdx);
 
         if (this.activeWordIdx === this.sets.length -1) {
             this.activeWordIdx = 0;
@@ -124,7 +131,7 @@ Vue.component('action', {
             this.activeWordIdx++;
         }
 
-        console.log(this.activeWordIdx, ' new active word idx');
+        //console.log(this.activeWordIdx, ' new active word idx');
 
         this.stage = 'newWord';
         this.answer = '';
@@ -134,11 +141,7 @@ Vue.component('action', {
        state.activePanel = 'list';
     },
     reset : function () {
-        this.sets = JSON.parse(JSON.stringify(this.originalSets)); 
-        this.activeWordIdx = 0;
-        this.lessonCompleted = false;
-        this.lessonStatus = '#FFD851';
-        this.completed = 0;
+        Object.assign(this.$data, this.$options.data())
     }
   }
 });

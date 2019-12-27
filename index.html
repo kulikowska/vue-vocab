@@ -33,15 +33,14 @@
                 <span v-bind:style="{ backgroundColor : lessonStatus, width : completed }"></span>
             </div>
 
-            <div class="words" v-if="!lessonCompleted">
+            <div class="words">
                 <div class="clue">{{ sets[activeWordIdx].clue }}</div>
                 <div class="input-wrap">
-                    <input type="text" v-model="answer"></input>
+                    <input type="text" v-model="answer" v-on:keyup.enter="enterKeyPress"></input>
                     <i class="fa fa-check" v-if="correct"></i>
                     <i class="fa fa-close" v-if="correct === false"></i>
                 </div>
 
-                <!--<div v-if="stage === 'answer'" class="answer">{{ sets[activeWordIdx].answer }}</div>--!>
 
                 <div class="button-wrap">
                     <i class="fa fa-close" v-on:click="toggleActive"></i>
@@ -51,8 +50,7 @@
                     </span>
                 </div>
             </div>
-            <div v-else>
-                All Done!
+            <div v-if="lessonCompleted">
                 <div class="button-wrap">
                     <button v-on:click="reset"> Play Again! </button>
                 </div>
