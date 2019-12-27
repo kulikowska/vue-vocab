@@ -113,6 +113,38 @@ body #action .words {
 body #action .words .clue {
   font-size: 40px;
 }
+body #action .words .input-wrap {
+  position: relative;
+  margin-top: 35px;
+  display: inline-block;
+}
+body #action .words .input-wrap input {
+  width: 300px;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  font-size: 26px;
+  padding: 10px;
+  box-shadow: 1px 1px 4px -3px;
+  font-family: 'Comfortaa', cursive;
+  transition: 300ms;
+}
+body #action .words .input-wrap input:focus {
+  outline: none;
+  border-bottom: 3px solid #00806b;
+}
+body #action .words .input-wrap i {
+  position: absolute;
+  right: -45px;
+  font-size: 34px;
+  top: 5px;
+}
+body #action .words .input-wrap i.fa-close {
+  color: #cb592d;
+}
+body #action .words .input-wrap i.fa-check {
+  color: #15b615;
+}
 body #action .words .answer {
   font-size: 30px;
   margin-top: 20px;

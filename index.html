@@ -35,15 +35,19 @@
 
             <div class="words" v-if="!lessonCompleted">
                 <div class="clue">{{ sets[activeWordIdx].clue }}</div>
-                <input type="text"></input>
-                <div v-if="stage === 'answer'" class="answer">{{ sets[activeWordIdx].answer }}</div>
+                <div class="input-wrap">
+                    <input type="text" v-model="answer"></input>
+                    <i class="fa fa-check" v-if="correct"></i>
+                    <i class="fa fa-close" v-if="correct === false"></i>
+                </div>
+
+                <!--<div v-if="stage === 'answer'" class="answer">{{ sets[activeWordIdx].answer }}</div>--!>
 
                 <div class="button-wrap">
                     <i class="fa fa-close" v-on:click="toggleActive"></i>
-                    <button v-if="stage === 'newWord'" v-on:click="stage = 'answer'"><i class="fa fa-question-circle"></i> Check </button>
-                    <span v-if="stage === 'answer'" class="yes-or-no">
-                        <button v-on:click="comeBack"> <i class="fa fa-asterisk"></i>Oops </button>
-                        <button v-on:click="nextWord(sets[activeWordIdx].clue)"><i class="fa fa-thumbs-up"></i> Correct!</button>
+                    <button v-if="stage === 'newWord'" v-on:click="checkAnswer(sets[activeWordIdx].answer)"><i class="fa fa-question-circle"></i> Check </button>
+                    <span v-if="stage === 'next'" class="yes-or-no">
+                        <button v-on:click="nextWord(sets[activeWordIdx].clue)"><i class="fa fa-thumbs-up"></i> Next</button>
                     </span>
                 </div>
             </div>
