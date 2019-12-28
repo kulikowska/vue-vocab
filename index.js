@@ -1,5 +1,5 @@
 const state = {
-    activePanel : 'action'
+    activePanel : 'list'
 }
 
 Vue.component('list', {
@@ -7,12 +7,17 @@ Vue.component('list', {
   data: function () {
     return {
         sets : setData.sets,
-        activePanel : state
+        activePanel : state,
+        selectedSet : 0
     }
   },
   methods : {
     toggleActive : function () {
        state.activePanel = 'action';
+    },
+    selectSet : function (i) {
+        this.$root.$emit('setChange', i);
+        this.selectedSet = i;
     }
   }
 })
@@ -40,7 +45,14 @@ Vue.component('action', {
    //console.log(this.originalSets, ' words');
   },
   mounted : function() {
-     this.$refs.answerInput.focus();
+     //this.$refs.answerInput.focus();
+     this.$root.$on('setChange', data => {
+        this.sets  = shuffle(setData.sets[data].words);
+
+    });
+  },
+  updated : function() {
+    //console.log('updating');
   },
   methods : {
     enterKeyPress : function(event) {

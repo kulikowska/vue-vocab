@@ -8,15 +8,15 @@
 <div id="root">
     <list id="list" inline-template>
         <div v-if="activePanel.activePanel === 'list'">
-            <h1> Polish Vocabulary Flashcards </h1>
+            <h1> Polish Vocabulary Test </h1>
             <ol class="set-wrap">
-                <li class="set" v-for="set in sets">
-                    <h1> {{ set.title }} </h1>
+                <li class="set" v-for="(set, i) in sets" @click="selectSet(i)" v-bind:class="{ active : selectedSet === i }">
+                    <h1> {{ set.title }} <span class="set-length">{{ set.words.length }}</span></h1>
                     <ol>
                         <li class="word" v-for="word in set.words">
                             <span>{{ word.clue }}</span>
-                            <span>{{ word.answer }}</span>
-                            <span>{{ word.category }}</span>
+                            <span class="answer">{{ word.answer }}</span>
+                            <span class="cat">{{ word.category }}</span>
                         </li>
                     </ol>
                 </li>

@@ -24,24 +24,53 @@ body .set-wrap .set {
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0px 0px 7px 0px #002d63;
-  padding: 0px 0px 15px 0px;
+  opacity: 0.6;
+  transition: 400ms;
+}
+body .set-wrap .set.active {
+  opacity: 1;
+}
+body .set-wrap .set:hover:not(.active) {
+  opacity: 0.8;
+  cursor: pointer;
 }
 body .set-wrap .set h1 {
   background: rgba(0, 0, 0, 0.7);
   text-transform: uppercase;
   font-size: 18px;
   padding: 10px;
-  margin: 0px 0px 20px;
+  margin: 0px 0px 0px;
   text-align: center;
+  position: relative;
 }
-body .set-wrap .set .word {
+body .set-wrap .set h1 .set-length {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0.6;
+}
+body .set-wrap .set ol {
+  max-height: 50vh;
+  overflow-y: auto;
+  background: #fff;
+  color: #000;
+  padding: 20px;
+}
+body .set-wrap .set ol .word {
   padding: 7px;
   font-size: 15px;
 }
-body .set-wrap .set .word span {
+body .set-wrap .set ol .word span {
   width: 150px;
   display: inline-block;
   text-transform: capitalize;
+  font-weight: bold;
+}
+body .set-wrap .set ol .word span.answer {
+  color: rgba(39, 65, 159, 0.9);
+}
+body .set-wrap .set ol .word span.cat {
+  color: rgba(39, 65, 159, 0.6);
 }
 body .set-wrap li {
   list-style: none;

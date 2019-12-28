@@ -23,11 +23,24 @@ let setData = {
             title : 'Set 2', 
             words : [
                 { clue : 'Wiec', answer : 'so', category : 'preposition' },
-                { clue : 'Gdy', answer : 'if', category : 'preposition' },
+                { clue : 'Gdy', answer : 'when', category : 'preposition' },
                 { clue : 'Niektorzy', answer : 'some', category : 'noun' },
                 { clue : 'Prawnie', answer : 'almost', category : 'noun' },
                 { clue : 'Niestety', answer : 'unfortunately', category : '' },
-                { clue : 'Najbardziej', answer : 'most', category : '' }
+                { clue : 'Najbardziej', answer : 'most', category : '' },
+                { clue : 'Za', answer : 'behind', category : '' },
+                { clue : 'Mokra', answer : 'wet', category : 'adjective' },
+                { clue : 'Miły', answer : 'nice', category : 'adjective' },
+                { clue : 'Nożem', answer : 'knife', category : 'noun' },
+                { clue : 'Może', answer : 'he can', category : 'verb' },
+                { clue : 'Doczekać', answer : 'wait', category : 'verb' },
+                { clue : 'Całe', answer : 'all', category : '' },
+                { clue : 'Dlatego', answer : 'because', category : 'conjunction' },
+                { clue : 'Zawsze', answer : 'always', category : 'adverb' },
+                { clue : 'Uczyć się', answer : 'learn', category : 'verb' },
+                { clue : 'Szybko', answer : 'fast', category : 'adjective' },
+                { clue : 'Chcesz', answer : 'you want', category : 'verb' },
+                { clue : 'Potem', answer : 'later', category : 'adverb' },
             ]
         }
    ]
