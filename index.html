@@ -6,58 +6,75 @@
 </head>
 
 <div id="root">
-    <list id="list" inline-template>
-        <div v-if="activePanel.activePanel === 'list'">
-            <h1> Polish Vocabulary Test </h1>
-            <ol class="set-wrap">
-                <li class="set" v-for="(set, i) in sets" @click="selectSet(i)" v-bind:class="{ active : selectedSet === i }">
-                    <h1> {{ set.title }} <span class="set-length">{{ set.words.length }}</span></h1>
-                    <ol>
-                        <li class="word" v-for="word in set.words">
-                            <span>{{ word.clue }}</span>
-                            <span class="answer">{{ word.answer }}</span>
-                            <span class="cat">{{ word.category }}</span>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-            <div class="button-wrap">
-                <button v-on:click="toggleActive"> Start </button>
-            </div>
-        </div>
-    </list>
-
-    <action id="action" inline-template>
-        <div v-if="activePanel.activePanel === 'action'">
-            <div class="status-bar">
-                <span v-bind:style="{ backgroundColor : lessonStatus, width : completed }"></span>
-            </div>
-
-            <div class="words">
-                <div class="clue">{{ sets[activeWordIdx].clue }}</div>
-                <div class="input-wrap">
-                    <input ref="answerInput" v-model="answer" v-on:keyup.enter="enterKeyPress"></input>
-                    <i class="fa fa-check" v-if="correct"></i>
-                    <i class="fa fa-close" v-if="correct === false"></i>
-                </div>
-                <div class="answer" v-if="!correct && stage === 'next'">{{ sets[activeWordIdx].answer}}</div>
-
-
+    <div v-if="activePanel === 'list'">
+        <list 
+          id="list" 
+          inline-template 
+          @toggle-panel="updateParent" 
+          @select-set="selectSet"
+          v-bind:selected-set="selectedSet"
+          v-bind:sets="sets"
+        >
+            <div>
+                <h1> Polish Vocabulary Test </h1>
+                <ol class="set-wrap">
+                    <li class="set" v-for="(set, i) in sets" @click="$emit('select-set', i)" v-bind:class="{ active : selectedSet == i }">
+                        <h1> {{ set.title }} <span class="set-length">{{ set.words.length }}</span></h1>
+                        <ol>
+                            <li class="word" v-for="word in set.words">
+                                <span>{{ word.clue }}</span>
+                                <span class="answer">{{ word.answer }}</span>
+                                <span class="cat">{{ word.category }}</span>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
                 <div class="button-wrap">
-                    <i class="fa fa-close" v-on:click="toggleActive"></i>
-                    <button v-if="stage === 'newWord'" v-on:click="checkAnswer(sets[activeWordIdx].answer)"><i class="fa fa-question-circle"></i> Check </button>
-                    <span v-if="stage === 'next'" class="yes-or-no">
-                        <button v-on:click="nextWord(sets[activeWordIdx].clue)"><i class="fa fa-thumbs-up"></i> Next</button>
-                    </span>
+                    <button @click="$emit('toggle-panel', 'action')"> Start </button>
                 </div>
             </div>
-            <div v-if="lessonCompleted">
-                <div class="button-wrap">
-                    <button v-on:click="reset"> Play Again! </button>
+        </list>
+    </div>
+
+    <div v-if="activePanel === 'action'">
+        <action 
+          id="action" 
+          inline-template 
+          @toggle-panel="updateParent" 
+          v-bind:selected-set="selectedSet"
+          v-bind:sets="shuffle(sets[selectedSet].words)"
+        >
+           <div>
+                <div class="status-bar">
+                    <span v-bind:style="{ backgroundColor : lessonStatus, width : completed }"></span>
+                </div>
+
+                <div class="words">
+                    <div class="clue">{{ sets[activeWordIdx].clue }}</div>
+                    <div class="input-wrap">
+                        <input ref="answerInput" v-model="answer" v-on:keyup.enter="enterKeyPress"></input>
+                        <i class="fa fa-check" v-if="correct"></i>
+                        <i class="fa fa-close" v-if="correct === false"></i>
+                    </div>
+                    <div class="answer" v-if="!correct && stage === 'next'">{{ sets[activeWordIdx].answer}}</div>
+
+
+                    <div class="button-wrap">
+                        <i class="fa fa-close" v-on:click="$emit('toggle-panel', 'list')"></i>
+                        <button v-if="stage === 'newWord'" v-on:click="checkAnswer(sets[activeWordIdx].answer)"><i class="fa fa-question-circle"></i> Check </button>
+                        <span v-if="stage === 'next'" class="yes-or-no">
+                            <button v-on:click="nextWord(sets[activeWordIdx].clue)"><i class="fa fa-thumbs-up"></i> Next</button>
+                        </span>
+                    </div>
+                </div>
+                <div v-if="lessonCompleted">
+                    <div class="button-wrap">
+                        <button v-on:click="reset"> Play Again! </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </action>
+        </action>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

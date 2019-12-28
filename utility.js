@@ -6,6 +6,7 @@ let setData = {
                 { clue : 'trudno', answer : 'difficult', category : 'adjective' },
                 { clue : 'Zaczyna', answer : 'begins', category : 'verb' },
                 { clue : 'wiele', answer : 'many', category : 'adjective' },
+                /*
                 { clue : 'Najlepsze', answer : 'best', category : 'adjective' },
                 { clue : 'przy tym', answer : 'at the same time', category : 'phrase' },
                 { clue : 'slodkim', answer : 'sweet', category : 'adjective' },
@@ -17,6 +18,7 @@ let setData = {
                 { clue : 'brudne', answer : 'dirty', category : 'adjective' },
                 { clue : 'czysty', answer : 'clean', category : 'adjective' },
                 { clue : 'zapomniec', answer : 'forget', category : 'verb' }
+                */
             ]
         },
         { 
@@ -46,6 +48,7 @@ let setData = {
    ]
 }
 
+/*
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -53,6 +56,7 @@ function shuffle(array) {
     }
     return array;
 }
+*/
 
 function getProgressBarStyle(completed) {
     var color;

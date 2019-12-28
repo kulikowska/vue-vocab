@@ -1,38 +1,27 @@
-const state = {
-    activePanel : 'list'
-}
-
 Vue.component('list', {
   template : '#list',
+  props : ['selectedSet', 'sets'],
   data: function () {
     return {
-        sets : setData.sets,
-        activePanel : state,
-        selectedSet : 0
+        //sets : setData.sets,
     }
   },
-  methods : {
-    toggleActive : function () {
-       state.activePanel = 'action';
-    },
-    selectSet : function (i) {
-        this.$root.$emit('setChange', i);
-        this.selectedSet = i;
-    }
-  }
+  created : function() {
+    console.log(this.selectedSet, ' props from crated');
+    console.log(this.sets, ' sets from created');
+  },
 })
 
 // At some point separate this out into a single file component, or something other than an inline template
 Vue.component('action', {
   template : '#action',
+  props : ['selectedSet', 'sets'],
   data: function () {
     return {
-        originalSets : setData.sets[0].words,
-        sets : shuffle(JSON.parse(JSON.stringify(setData.sets[0].words))),
-        wordsRemaining : setData.sets[0].words.length,
+        //originalSets : setData.sets[0].words,
+        //wordsRemaining : this.sets[this.selectedSet].words.length,
         activeWordIdx : 0,
 
-        activePanel : state,
         stage : 'newWord',
         lessonStatus : 'yellow',
         completed : 0,
@@ -41,15 +30,22 @@ Vue.component('action', {
         correct : undefined 
     }
   },
-  created : function() {
-   //console.log(this.originalSets, ' words');
-  },
   mounted : function() {
-     //this.$refs.answerInput.focus();
+     console.log(this.sets, ' sets');
+     this.$refs.answerInput.focus();
+
+     this.originalSets = JSON.parse(JSON.stringify(this.sets));
+     this.setsLength = this.sets.length;
+     this.wordsRemaining = this.sets.length;
+
+     //this.sets  = shuffle(this.sets);
+
+     /*
      this.$root.$on('setChange', data => {
         this.sets  = shuffle(setData.sets[data].words);
 
     });
+    */
   },
   updated : function() {
     //console.log('updating');
@@ -65,9 +61,11 @@ Vue.component('action', {
     checkAnswer : function(correctAnswer) {
         //console.log('check answer', this.answer, correctAnswer);
         if (correctAnswer === this.answer) {
+            console.log(this.setsLength);
 
             this.wordsRemaining--;
-            this.completed = 100 - (( this.wordsRemaining / this.originalSets.length) * 100);
+            //this.completed = 100 - (( this.wordsRemaining / this.originalSets.length) * 100);
+            this.completed = 100 - (( this.wordsRemaining / this.setsLength) * 100);
 
             var progressBar = getProgressBarStyle(this.completed);
             this.lessonStatus = progressBar[0];
@@ -95,13 +93,38 @@ Vue.component('action', {
         this.answer = '';
         this.correct = undefined;
     },
-    toggleActive : function () {
-       state.activePanel = 'list';
-    },
     reset : function () {
+        // think up a better system for this
+        console.log(this.originalSets, ' original sets');
+        this.sets = this.originalSets;
+        this.setsLength = this.sets.length;
+        this.wordsRemaining = this.sets.length;
+
         Object.assign(this.$data, this.$options.data())
-    }
+    },
   }
 });
 
-new Vue({ el: '#root' })
+new Vue({ 
+    el: '#root',
+    data : {
+        activePanel : 'list',
+        selectedSet : 0,
+        sets : setData.sets
+    },
+    methods: {
+        updateParent(data) {
+            this.activePanel = data; 
+        },
+        selectSet(data) {
+            this.selectedSet = data; 
+        },
+        shuffle : function(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+    }
+})
